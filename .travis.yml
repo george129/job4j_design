@@ -4,6 +4,7 @@ jdk:
 sudo: false
 env:
   global:
+  - CODECOV_TOKEN="d8a09518-31a7-4064-9cfd-566d63319ab4"
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
