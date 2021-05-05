@@ -64,11 +64,11 @@ public class SimpleArrayTest {
 
     @Test
     public void growCheck() {
-        for(int i = 0; i < 250; i++) {
+        for (int i = 0; i < 250; i++) {
             sa.add(i);
         }
-        for(; sa.size()>0;) {
-            sa.remove(sa.size());
+        for (; sa.size() > 0;) {
+            sa.remove(sa.size() - 1);
         }
 
     }

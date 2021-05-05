@@ -21,8 +21,10 @@ Objects.checkIndex(index, size);
 
 package ru.job4j.generics;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] array;
@@ -46,10 +48,13 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     private void compress(int index) {
-        if(index < size) {
+        if (index < size - 1) {
             System.arraycopy(array, index + 1, array, index, size - index);
-        } else {
-            System.arraycopy(array, index + 1, array, index, size - index);
+        } else if (index == size - 1) {
+            array[index] = null;
+            if (size > 10) {
+                array = Arrays.copyOf(array, size + size >> 1);
+            }
         }
     }
 
@@ -58,17 +63,19 @@ public class SimpleArray<T> implements Iterable<T> {
             extend();
         }
         array[size++] = model;
-
     }
 
     public void set(int index, T model) {
-        if (index >= 0 && index <= size) {
-            array[index] = model;
-        }
+        Objects.checkIndex(index, size);
+        array[index] = model;
     }
 
+    /*
+    Objects.checkIndex() - для проверки, находится ли индекс в пределах заданной длины.
+    Возвращает индекс, если 0 <= index < length, иначе генерирует исключение IndexOutOfBoundsException.
+     */
     public void remove(int index) {
-        if
+        Objects.checkIndex(index, size);
         compress(index);
         size--;
     }
