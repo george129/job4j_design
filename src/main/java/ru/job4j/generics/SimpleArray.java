@@ -35,6 +35,15 @@ public class SimpleArray<T> implements Iterable<T> {
         array = new Object[10];
     }
 
+    public SimpleArray(int n) {
+        if (n > 0 && n <= Integer.MAX_VALUE) {
+            size = n;
+            array = new Object[n];
+        } else {
+            throw new ArrayStoreException("Too much elements");
+        }
+    }
+
     private void extend() {
         int newsize = 0;
         if (array.length <= Integer.MAX_VALUE * 0.66) {
