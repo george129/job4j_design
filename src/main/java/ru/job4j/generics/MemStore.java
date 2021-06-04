@@ -13,16 +13,6 @@ public final class MemStore<T extends Base>  implements Store<T> {
     private final Map<String, T> mem = new HashMap<>();
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    @Override
     public void add(T model) {
         mem.put(model.getId(), model);
     }
