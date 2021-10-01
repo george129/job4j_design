@@ -26,7 +26,7 @@ public class UserStoreTest {
 
     @Test
     public void add() {
-        User expected = new User("006","Guest");
+        User expected = new User("006", "Guest");
         user.add(expected);
         assertEquals(expected, user.findById("006"));
     }

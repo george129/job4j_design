@@ -26,7 +26,7 @@ public class RoleStoreTest {
 
     @Test
     public void add() {
-        Role expected = new Role("006","Guest");
+        Role expected = new Role("006", "Guest");
         rosto.add(expected);
         assertEquals(expected, rosto.findById("006"));
     }
