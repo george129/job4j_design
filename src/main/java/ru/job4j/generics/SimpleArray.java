@@ -1,6 +1,6 @@
-/*
+/**
 Создать класс:
-public class SimpleArrayList<T>
+public class SimpleArray<T>
 Добавить методы:
 add(T model) - добавляет указанный элемент (model) в первую свободную ячейку;
 set(int index, T model) - заменяет указанным элементом (model) элемент, находящийся по индексу index;
