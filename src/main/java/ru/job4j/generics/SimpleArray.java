@@ -1,6 +1,6 @@
 /*
 Создать класс:
-public class SimpleArray<T>
+public class SimpleArrayList<T>
 Добавить методы:
 add(T model) - добавляет указанный элемент (model) в первую свободную ячейку;
 set(int index, T model) - заменяет указанным элементом (model) элемент, находящийся по индексу index;
@@ -37,7 +37,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
     public SimpleArray(int n) {
         if (n > 0 && n <= Integer.MAX_VALUE) {
-            size = n;
+            size = 0;
             array = new Object[n];
         } else {
             throw new ArrayStoreException("Too much elements");
@@ -49,7 +49,7 @@ public class SimpleArray<T> implements Iterable<T> {
         if (array.length <= Integer.MAX_VALUE * 0.66) {
             newsize = array.length + (array.length >> 1);
         } else {
-            throw new ArrayIndexOutOfBoundsException("to much elements");
+            throw new ArrayIndexOutOfBoundsException("Too much elements");
         }
         Object[] newArray = new Object[newsize];
         System.arraycopy(array, 0, newArray, 0, size);

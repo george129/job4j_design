@@ -45,7 +45,7 @@ public class SimpleArrayList<T> implements ru.job4j.list.List<T> {
                 container = Arrays.copyOf(container, size + size >> 1);
             }
         }
-        container = Arrays.copyOf(container,2);
+        container = Arrays.copyOf(container, 2);
     }
 
     @Override
