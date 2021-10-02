@@ -15,25 +15,22 @@ public class SimpleArrayList<T> implements ru.job4j.list.List<T> {
     }
 
     public SimpleArrayList(int capacity) {
-        if (capacity > 0 && capacity < Integer.MAX_VALUE) {
-            this.container = (T[]) new Object[capacity];
-            this.size = 0;
-            modCount = 0;
-        } else {
+        if (capacity < 0) {
             throw new IndexOutOfBoundsException(capacity);
         }
+        this.container = (T[]) new Object[capacity];
+        this.size = 0;
+        modCount = 0;
     }
 
+    /**
+     *
+        if (size > Integer.MAX_VALUE * 0.666) {
+        throw new IndexOutOfBoundsException("Indexes count exceeds MAX_VALUE of Integer");
+    }
+     */
     private void extend() {
-        int newsz;
-        if (size <= Integer.MAX_VALUE * 0.666) {
-            newsz = size + size / 2;
-        } else {
-            throw new IndexOutOfBoundsException("Indexes count exceeds MAX_VALUE of Integer");
-        }
-        T[] newcon = (T[]) new Object[newsz];
-        System.arraycopy(container, 0, newcon, 0, size);
-        container = newcon;
+        container = Arrays.copyOf(container, size * 2);
     }
 
     private void removeHole(int holeIndex) {
@@ -59,23 +56,24 @@ public class SimpleArrayList<T> implements ru.job4j.list.List<T> {
 
     @Override
     public T set(int index, T newWalue) {
-        Objects.checkIndex(index, container.length);
+        Objects.checkIndex(index, size);
         container[index] = newWalue;
         return container[index];
     }
 
     @Override
     public T get(int index) {
-        Objects.checkIndex(index, container.length);
+        Objects.checkIndex(index, size);
         return (T) container[index];
     }
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, container.length);
+        Objects.checkIndex(index, size);
         T removed = container[index];
         removeHole(index);
         size--;
+        modCount++;
         return removed;
     }
 
@@ -104,11 +102,10 @@ public class SimpleArrayList<T> implements ru.job4j.list.List<T> {
 
             @Override
             public T next() {
-                if (hasNext()) {
-                    return (T) container[index++];
-                } else {
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
+                return (T) container[index++];
             }
         }
         return new SimpleArrayIterator();
