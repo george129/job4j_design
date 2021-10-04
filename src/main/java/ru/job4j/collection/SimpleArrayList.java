@@ -34,15 +34,11 @@ public class SimpleArrayList<T> implements ru.job4j.list.List<T> {
     }
 
     private void removeHole(int holeIndex) {
-        if (holeIndex < size - 1) {
-            System.arraycopy(container, holeIndex + 1, container, holeIndex,  size - holeIndex);
-        } else if (holeIndex == size - 1) {
+        if (holeIndex == size - 1) {
             container[holeIndex] = null;
-            if (size > 10) {
-                container = Arrays.copyOf(container, size + size >> 1);
-            }
+        } else {
+            System.arraycopy(container, holeIndex + 1, container, holeIndex,  size - holeIndex);
         }
-        container = Arrays.copyOf(container, 2);
     }
 
     @Override
