@@ -85,7 +85,8 @@ public class SimpleArrayList<T> implements ru.job4j.list.List<T> {
             private int snapshot;
 
             public SimpleArrayIterator() {
-                this.snapshot = modCount;
+                snapshot = modCount;
+                index = 0;
             }
 
             @Override
