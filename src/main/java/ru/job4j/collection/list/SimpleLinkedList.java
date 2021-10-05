@@ -12,20 +12,10 @@ public class SimpleLinkedList<E> implements List<E> {
     private int size;
 
     public SimpleLinkedList() {
-        modCount = 0;
-        size = 0;
-        first = null;
-        last = null;
-    }
-
-    private Node<E> find(int index) {
-        Node<E> current = first;
-        int position = 0;
-        while (current != null && position < index) {
-            position++;
-            current = current.nextNode;
-        }
-        return current;
+        this.modCount = 0;
+        this.size = 0;
+        this.first = null;
+        this.last = null;
     }
 
     @Override
@@ -34,11 +24,9 @@ public class SimpleLinkedList<E> implements List<E> {
         if (first == null) {
             first = temp;
             first.setNext(null);
-            first.setPrev(null);
             last = first;
         } else {
             last.setNext(temp);
-            temp.setPrev(last);
             last = temp;
         }
         modCount++;
@@ -48,7 +36,13 @@ public class SimpleLinkedList<E> implements List<E> {
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        return find(index).getData();
+        Node<E> current = first;
+        int position = 0;
+        while (current != null && position < index) {
+            position++;
+            current = current.nextNode;
+        }
+        return current.getData();
     }
 
     @Override
@@ -76,7 +70,7 @@ public class SimpleLinkedList<E> implements List<E> {
                     throw new NoSuchElementException();
                 }
                 Node<E> ret = cursor;
-                cursor = cursor.nextNode;
+                cursor = cursor.getNextNode();
                 return ret.getData();
             }
         }
@@ -86,7 +80,6 @@ public class SimpleLinkedList<E> implements List<E> {
     private class Node<E> {
         private Node<E> nextNode;
         private E data;
-        private Node<E> prevNode;
 
         public Node(E data) {
             this.data = data;
@@ -96,16 +89,8 @@ public class SimpleLinkedList<E> implements List<E> {
             return nextNode;
         }
 
-        public Node<E> getPrevNode() {
-            return prevNode;
-        }
-
         public void setNext(Node<E> next) {
             nextNode = next;
-        }
-
-        public void setPrev(Node<E> previous) {
-            prevNode = previous;
         }
 
         public E getData() {
