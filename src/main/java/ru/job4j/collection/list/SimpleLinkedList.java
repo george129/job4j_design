@@ -38,7 +38,7 @@ public class SimpleLinkedList<E> implements List<E> {
         Objects.checkIndex(index, size);
         Node<E> current = first;
         int position = 0;
-        while (current != null && position < index) {
+        while (position < index) {
             position++;
             current = current.getNextNode();
         }
