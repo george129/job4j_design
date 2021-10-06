@@ -40,7 +40,7 @@ public class SimpleLinkedList<E> implements List<E> {
         int position = 0;
         while (current != null && position < index) {
             position++;
-            current = current.nextNode;
+            current = current.getNextNode();
         }
         return current.getData();
     }
