@@ -10,7 +10,7 @@ public class SimpleQueue<T> {
         if (out.isEmpty() && in.isEmpty()) {
                 throw new NoSuchElementException();
         }
-        if (out.isEmpty() && !in.isEmpty()) {
+        if (out.isEmpty()) {
             while (!in.isEmpty()) {
                 out.push(in.pop());
             }
