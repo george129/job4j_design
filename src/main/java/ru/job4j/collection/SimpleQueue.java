@@ -15,7 +15,14 @@ public class SimpleQueue<T> {
 
     public T poll() {
         if (outSize == 0) {
-            migrate();
+            if (inSize == 0) {
+                throw new NoSuchElementException();
+            }
+            while (inSize > 0) {
+                out.push(in.pop());
+                outSize++;
+                inSize--;
+            }
         }
         outSize--;
         return out.pop();
@@ -24,16 +31,5 @@ public class SimpleQueue<T> {
     public void push(T value) {
         in.push(value);
         inSize++;
-    }
-
-    private void migrate() {
-        if (inSize == 0) {
-            throw new NoSuchElementException();
-        }
-        while (inSize > 0) {
-            out.push(in.pop());
-            outSize++;
-            inSize--;
-        }
     }
 }
