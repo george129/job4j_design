@@ -5,31 +5,20 @@ import java.util.NoSuchElementException;
 public class SimpleQueue<T> {
     private final SimpleStack<T> in = new SimpleStack<>();
     private final SimpleStack<T> out = new SimpleStack<>();
-    private int inSize;
-    private int outSize;
-
-    SimpleQueue() {
-        this.inSize = 0;
-        this.outSize = 0;
-    }
 
     public T poll() {
-        if (outSize == 0 && inSize == 0) {
+        if (out.isEmpty() && in.isEmpty()) {
                 throw new NoSuchElementException();
         }
-        if (outSize == 0 && inSize > 0) {
-            while (inSize > 0) {
+        if (out.isEmpty() && !in.isEmpty()) {
+            while (!in.isEmpty()) {
                 out.push(in.pop());
-                outSize++;
-                inSize--;
             }
         }
-        outSize--;
         return out.pop();
     }
 
     public void push(T value) {
         in.push(value);
-        inSize++;
     }
 }
