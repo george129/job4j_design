@@ -16,7 +16,8 @@ public class SimpleQueue<T> {
     public T poll() {
         if (outSize == 0 && inSize == 0) {
                 throw new NoSuchElementException();
-        } else if (outSize == 0 && inSize > 0) {
+        }
+        if (outSize == 0 && inSize > 0) {
             while (inSize > 0) {
                 out.push(in.pop());
                 outSize++;
