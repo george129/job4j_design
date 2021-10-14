@@ -9,25 +9,13 @@ import java.util.function.Predicate;
 public class ListUtils {
     public static <T> void addBefore(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
-        ListIterator<T> i = list.listIterator();
-        while (i.hasNext()) {
-            if (i.nextIndex() == index) {
-                i.add(value);
-                break;
-            }
-            i.next();
-        }
+        ListIterator<T> i = list.listIterator(index);
+        i.add(value);
     }
 
     public static <T> void addAfter(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
-        ListIterator<T> li = list.listIterator();
-        while (li.hasNext()) {
-            if (li.nextIndex() > index) {
-                break;
-            }
-            li.next();
-        }
+        ListIterator<T> li = list.listIterator(index + 1);
         li.add(value);
     }
 
@@ -61,5 +49,4 @@ public class ListUtils {
             }
         }
     }
-
 }
